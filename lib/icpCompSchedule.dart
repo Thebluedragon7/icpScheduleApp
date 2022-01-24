@@ -36,7 +36,24 @@ class _ICPCompScheduleState extends State<ICPCompSchedule> {
   @override
   Widget build(BuildContext context) {
 
-    int _endMin = 90;
+    print(MediaQuery.of(context).size.height);
+    print(MediaQuery.of(context).size.width);
+    /*
+      Responsive section;
+      card height, font size and other adjustments
+     */
+    double smallCardHeight =  MediaQuery.of(context).size.height * 0.04;
+    double smallCardWidth =  MediaQuery.of(context).size.width * 0.3;
+
+    double topBottomCardHeight = MediaQuery.of(context).size.height * 0.1;
+    double topBottomCardWidth = MediaQuery.of(context).size.width * 0.85;
+
+    double fontSize1 = 0.0;
+    double fontSize2 = 0.0;
+    double fontSize3 = 16;
+    double fontSize4 = 0.0;
+
+    int _endMin;
     bool _endingCard = (context.watch<ICPTimeProvider>().periodIndex == 0) ? context.watch<ICPTimeProvider>().firstClassEnded : context.watch<ICPTimeProvider>().secondClassEnded;
     bool _startingCard = (context.watch<ICPTimeProvider>().periodIndex == 0) ? context.watch<ICPTimeProvider>().firstClassStarted : context.watch<ICPTimeProvider>().secondClassStarted;
     DateTime date = DateTime.now();
@@ -46,7 +63,8 @@ class _ICPCompScheduleState extends State<ICPCompSchedule> {
     _firstCountDown = !classTimeRemaining[0];
     _secondCountDown = classTimeRemaining[0];
 
-
+    _endMin = 90;
+    // if (classTimeRemaining[0]) {} subtract time from end time or 90 minutes
 
     return Consumer<ICPTimeProvider>(
       builder: (context, notifier, child) => Padding(
@@ -54,22 +72,44 @@ class _ICPCompScheduleState extends State<ICPCompSchedule> {
         child: Column(
           children: [
             Card(
+              color: Colors.redAccent,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50)
+              ),
+              elevation: 12,
+              child: SizedBox(
+                height: topBottomCardHeight,
+                width: topBottomCardWidth,
+                child: Center(
+                    child: Text(
+                      widget.day,
+                      style: const TextStyle(
+                          fontSize: 52,
+                          color: Colors.white70
+                      ),
+                    )
+                ),
+              ),
+            ),
+            Card(
               elevation: 14,
               color: Colors.white,
               shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
               child: Column(
                 children: [
-                  Text(
-                    "${week[widget.day]![notifier.periodIndex].type} Class",
-                    style: const TextStyle(
-                      color: Colors.redAccent,
-                      fontSize: 30,
-                      fontWeight: FontWeight.w700,
+                  Center(
+                    child: Text(
+                      "${week[widget.day]![notifier.periodIndex].type} Class",
+                      style: const TextStyle(
+                        color: Colors.redAccent,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.021,
+                    height: MediaQuery.of(context).size.height * 0.015,
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,8 +125,8 @@ class _ICPCompScheduleState extends State<ICPCompSchedule> {
                                 ? Colors.grey
                                 : Colors.redAccent,
                             child: SizedBox(
-                              height: 25,
-                              width: 85,
+                              height: smallCardHeight,
+                              width: smallCardWidth,
                               child: Center(
                                 child: Text(
                                   week[widget.day]![notifier.periodIndex].startTime,
@@ -119,8 +159,8 @@ class _ICPCompScheduleState extends State<ICPCompSchedule> {
                             color:
                             _endingCard ? Colors.grey : Colors.redAccent,
                             child: SizedBox(
-                              height: 25,
-                              width: 85,
+                              height: smallCardHeight,
+                              width: smallCardWidth,
                               child: Center(
                                 child: Text(
                                   week[widget.day]![notifier.periodIndex].endTime,
@@ -159,13 +199,14 @@ class _ICPCompScheduleState extends State<ICPCompSchedule> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),
                     child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height * 0.1,
+                      width: topBottomCardWidth,
+                      height: topBottomCardHeight,
                       child: Center(
                         child: Text(
                           "${week[widget.day]![notifier.periodIndex].room}\n${week[widget.day]![notifier.periodIndex].block} Block",
                           style: const TextStyle(
-                              fontSize: 29, color: Colors.black38),
+                              // fontSize: fontSize3,
+                              color: Colors.black38),
                         ),
                       ),
                     ),
@@ -372,6 +413,30 @@ class _ICPCompScheduleState extends State<ICPCompSchedule> {
                                       fontSize: 19,
                                       fontWeight: FontWeight.w700
                                   ),),
+                              ),
+                              ListTile(
+                                textColor: Colors.redAccent,
+                                title: Center(
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: "by\t\t\t",
+                                      style: TextStyle(
+                                        color: Colors.red
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                          text: week[widget.day]![1].lecturer,
+                                          style: TextStyle(
+                                            fontFamily: "OpenSansCondensed-LightItalic",
+                                            color: Colors.redAccent,
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.w700
+                                          )
+                                        ),
+                                      ]
+                                    ),
+                                  ),
+                                ),
                               ),
                               ButtonBar(
                                 children: [

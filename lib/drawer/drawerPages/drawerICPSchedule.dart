@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icp_bit_schedule/core/icpDatas.dart';
+import 'package:icp_bit_schedule/drawer/icpDrawer.dart';
 import 'package:intl/intl.dart';
 
 class DrawerICPSchedule extends StatelessWidget {
@@ -12,6 +15,7 @@ class DrawerICPSchedule extends StatelessWidget {
     String _today = DateFormat('EEEE').format(date);
     final List<String> dayList = week.keys.toList();
     return Scaffold(
+      drawer: const ICPDrawer(),
       body: SafeArea(
         child: DefaultTabController(
             length: week.length,
@@ -60,7 +64,7 @@ class DrawerICPSchedule extends StatelessWidget {
                                   ),
                                   child: SizedBox(
                                     height: MediaQuery.of(context).size.height *
-                                        0.3,
+                                        0.33,
                                     width: MediaQuery.of(context).size.width,
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -211,7 +215,16 @@ class DrawerICPSchedule extends StatelessWidget {
                                                     ])),
                                               ),
                                             ),
-                                          )
+                                          ),
+                                          Text(
+                                            week[dayList[i]]![0].lecturer,
+                                          style: TextStyle(
+                                            color: Colors.white70,
+                                            fontFamily: 'OpenSansCondensed-LightItalic',
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.w800
+                                          ),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -228,7 +241,7 @@ class DrawerICPSchedule extends StatelessWidget {
                                   ),
                                   child: SizedBox(
                                     height: MediaQuery.of(context).size.height *
-                                        0.3,
+                                        0.35,
                                     width: MediaQuery.of(context).size.width,
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -379,7 +392,16 @@ class DrawerICPSchedule extends StatelessWidget {
                                                     ])),
                                               ),
                                             ),
-                                          )
+                                          ),
+                                          Text(
+                                            week[dayList[i]]![1].lecturer,
+                                            style: TextStyle(
+                                                color: Colors.white70,
+                                                fontFamily: 'OpenSansCondensed-LightItalic',
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.w800
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),

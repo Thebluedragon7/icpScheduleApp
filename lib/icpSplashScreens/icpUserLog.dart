@@ -1,19 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:icp_bit_schedule/drawer/icpDrawer.dart';
 
-class ICPUserLog extends StatefulWidget {
+class ICPUserLog extends StatelessWidget {
   const ICPUserLog({Key? key}) : super(key: key);
 
   @override
-  _ICPUserLogState createState() => _ICPUserLogState();
-}
-
-class _ICPUserLogState extends State<ICPUserLog> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const ICPDrawer(),
-      body: Container(),
+      body: SafeArea(child: ICPForm()),
     );
   }
 }
+
+class ICPForm extends StatefulWidget {
+  const ICPForm({Key? key}) : super(key: key);
+
+  @override
+  _ICPFormState createState() => _ICPFormState();
+}
+
+class _ICPFormState extends State<ICPForm> {
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      child: Column(
+        children: [
+          TextFormField(
+          ),
+        ],
+      ),
+    );
+  }
+}
+

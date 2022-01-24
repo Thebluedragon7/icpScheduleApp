@@ -21,26 +21,7 @@ class ICPHome extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Card(
-              color: Colors.redAccent,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50)
-              ),
-              elevation: 12,
-              child: SizedBox(
-                height: 85,
-                width: 295,
-                child: Center(
-                    child: Text(
-                      _today,
-                      style: const TextStyle(
-                          fontSize: 52,
-                          color: Colors.white70
-                      ),
-                    )
-                ),
-              ),
-            ),
+
             ICPCompSchedule(day: _today,),
           ],
         ),
